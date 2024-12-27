@@ -74,7 +74,7 @@ function DisplayTable() {
     for (var i = 0; i < planetNames.length; i++) {
         console.log("i = " + i + ", planet = " + astroMilMiles[i]);
         if (i == planetNames.length - 1) {
-            planetWalk = '';
+            planetWalk = ' ';
         } else {
             var d3 = astroMilMiles[i + 1] - astroMilMiles[i];
             planetWalk = d3 / scale
@@ -196,18 +196,25 @@ function Radio(Location, name, value, currentValue) {
     return true
 }
 function DisplayFeet2outUnits(number) {
+    if (0 == number) {
+        return '0';
+    }
     switch (outputFormat) {
         case 'English':
+            x = number * 1.0;
             if (number < 2640) {
-                return number + ' ft';
+                return x.toFixed(1) + ' ft';
             } else {
-                return (number / 5280) + ' miles';
+                x = x / 5280;
+                return x.toFixed(1) + ' miles';
             }
         case 'Metric':
+            x = number * 0.3048;
             if (number < 1540) { //  1/2 km
-                return (number * 0.3048) + " m";
+                return x.toFixed(1) + " m";
             } else {
-                return (number * 0.0003048) + " km";
+                x = x / 1000;
+                return x.toFixed(1) + " km";
             }
         case 'Steps':
             x = number / 2.5;
