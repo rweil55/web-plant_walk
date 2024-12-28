@@ -3,7 +3,14 @@ var astroInner = [0, 36, 67, 93, 141, 483, 886, 1782, 2793, 3670];
 var astroOuter = [0, 46, 72, 100, 152, 520, 952, 1920, 3000, 3950]; // in million miles
 var outputFormat = 'English';
 
+function displayMenu() {
+    menuLocation = document.getElementById('menu');
+    menuLocation.innerHTML = '<a href="index.html">Home</a> &nbsp; ' +
+        ' <a href="known_walks.html">Known Walks</a> &nbsp;' +
+        '<a href="descriptions.html"> Planet descriptions</a>';
+}
 function buildForm() {
+    displayMenu();
     var form = document.createElement('form');
     form.setAttribute('method', 'post');
     form.setAttribute('action', 'http:/');
