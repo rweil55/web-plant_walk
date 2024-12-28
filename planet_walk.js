@@ -5,9 +5,44 @@ var outputFormat = 'English';
 
 function displayMenu() {
     menuLocation = document.getElementById('menu');
-    menuLocation.innerHTML = '<a href="index.html">Home</a> &nbsp; ' +
-        ' <a href="known_walks.html">Known Walks</a> &nbsp;' +
-        '<a href="descriptions.html"> Planet descriptions</a>';
+    menuLocation.innerHTML = '<ul>' +
+        '<li><a href="index.html">Home</a> &nbsp; </li>' +
+        ' <li> <a href="known_walks.html">Known Walks</a> &nbsp; </li>' +
+        ' <li><a href="descriptions.html"> Planet descriptions</a> </li>' +
+        ' <li textcolor:white; >Examples:' +
+        '   <li onclick="simple();"> 1200 foot walk, </li > ' +
+        '   <li onclick="brooke();"> Brooke Pioneer Trail </li > ' +
+        '</li>'
+    '</ul>';
+
+    /*
+       ' <div id="sub" class="submenu"> ' +
+        '<ul>' +
+        '   <li onclick="simple();"> 1200 foot walk </li ><br> ' +
+        '   <li onclick="brooke();"> Brooke Pioneer Trail </li > ' +
+        '</ul>' +
+        '</div > ' +
+ '<ul>' +
+        '   <li> 1200 foot walk </li > ' +
+        '   <li> Brooke Pioneer Trail </li > ' +
+        '</ul>' +
+
+<ul id="menu-menu-2" class="nav-menu menucolor"><li id="menu-item-5720" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-5720"><a href="https://signmanual.eriepittsburghtrail.com/page-table-of-contents/">Table of Contents</a>
+<ul class="sub-menu">
+<li id="menu-item-5786" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5786"><a href="https://signmanual.eriepittsburghtrail.com/page-1-1-introduction/">1.1 Introduction</a></li>
+<li id="menu-item-5273" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5273"><a href="https://signmanual.eriepittsburghtrail.com/page-1-3-getting-started/">1.3 Getting Started</a></li>
+</ul>
+</li>
+<li id="menu-item-5188" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-5188"><a href="https://signmanual.eriepittsburghtrail.com/page-2-1-graphic-identity/">2.1 Graphic Identity</a>
+<ul class="sub-menu">
+<li id="menu-item-5787" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5787"><a href="https://signmanual.eriepittsburghtrail.com/page-2-2-ept-on-state-roads/">2.2 EPT on State Roads</a></li>
+<li id="menu-item-5788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5788"><a href="https://signmanual.eriepittsburghtrail.com/page-2-3-federal-signs-mutcd/">2.3 Federal Signs MUTCD</a></li>
+<li id="menu-item-5789" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5789"><a href="https://signmanual.eriepittsburghtrail.com/page-2-4-individual-trail-logos/">2.4 Individual Trail Logos</a></li>
+</ul>
+</li>
+<li id="menu-item-5189" class="menu-item menu-item-type-post_type
+
+*/
 }
 function buildForm() {
     displayMenu();
@@ -203,9 +238,11 @@ function Radio(Location, name, value, currentValue) {
     return true
 }
 function DisplayFeet2outUnits(number) {
-    if (0 == number) {
+    number = Math.abs(number);
+    if (number < .0001) {
         return '0';
     }
+
     switch (outputFormat) {
         case 'English':
             x = number * 1.0;
@@ -213,7 +250,7 @@ function DisplayFeet2outUnits(number) {
                 return x.toFixed(1) + ' ft';
             } else {
                 x = x / 5280;
-                return x.toFixed(1) + ' miles';
+                return x.toFixed(3) + ' miles';
             }
         case 'Metric':
             x = number * 0.3048;
@@ -221,7 +258,7 @@ function DisplayFeet2outUnits(number) {
                 return x.toFixed(1) + " m";
             } else {
                 x = x / 1000;
-                return x.toFixed(1) + " km";
+                return x.toFixed(3) + " km";
             }
         case 'Steps':
             x = number / 2.5;
@@ -233,4 +270,23 @@ function DisplayFeet2outUnits(number) {
         default:
             return 'unknown units';
     }
-}
+} // end of DisplayFeet2outUnits
+function brooke() {
+
+    document.getElementById('planetFrom').value = "Sun"
+    document.getElementById('planetFromDistance').value = '6.9';
+    document.getElementById('planetFromUnit').value = 'miles';
+    document.getElementById('planetTo').value = "Pluto"
+    document.getElementById('planetToDistance').value = '3.7';
+    document.getElementById('planetToUnit').value = 'miles';
+    DisplayTable();
+} //
+function simple() {
+    document.getElementById('planetFrom').value = "Sun"
+    document.getElementById('planetFromDistance').value = '0';
+    document.getElementById('planetFromUnit').value = 'feet';
+    document.getElementById('planetTo').value = "Earth"
+    document.getElementById('planetToDistance').value = '100';
+    document.getElementById('planetToUnit').value = 'feet';
+    DisplayTable();
+} //
