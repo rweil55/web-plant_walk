@@ -12,8 +12,10 @@ function displayMenu() {
         ' <li textcolor:white; >Examples:' +
         '   <li onclick="simple();"> 1200 foot walk, </li > ' +
         '   <li onclick="brooke();"> Brooke Pioneer Trail </li > ' +
-        '</li>'
-    '</ul>';
+        '</li>' +
+        '</ul>';
+    trailerLocation = document.getElementById('trailer');
+    trailerLocation.innerHTML = 'This page brought to you via the regional bicycle guide book <a href="https://freewheelingeasy.com" >FreewheelingEasy in Western Pennsylvania</a>.</p>';
 
     /*
        ' <div id="sub" class="submenu"> ' +
@@ -46,6 +48,7 @@ function displayMenu() {
 }
 function buildForm() {
     displayMenu();
+
     var form = document.createElement('form');
     form.setAttribute('method', 'post');
     form.setAttribute('action', 'http:/');
@@ -95,6 +98,7 @@ function DisplayTable() {
         OutputUnitsLocation.innerHTML = '';
         return true;
     }
+
     var startDistance = convertInput2Feet(startDistance, startUnit);
     var endDistance = convertInput2Feet(endDistance, endUnit);
     var walkDistance = endDistance - startDistance;
@@ -111,6 +115,7 @@ function DisplayTable() {
     table.setAttribute('border', '1');
     table.appendChild(headerRow('Planet', 'inner', 'outer', 'distance', 'distance', 'possible'));
     table.appendChild(headerRow('      ', '     ', '     ', 'to next ', 'from Sun', 'range   '));
+
     var sumDistance = startDistance;
     var planetWalk;
     for (var i = 0; i < planetNames.length; i++) {
@@ -122,11 +127,13 @@ function DisplayTable() {
             planetWalk = d3 / scale
             console.log("ivalue = " + i + ", d1 = " + astroMilMiles[i + 1] + ", d2 = " + astroMilMiles[i] + ", d3 = " + d3 + ", scale = " + scale + ", planetWalk = " + planetWalk + "ivalue = " + i)
             planetWalk = planetWalk.toFixed(4);
+
         }
         $range = (astroDifference[i] / 2) / scale;
         table.appendChild(cellRow(planetNames[i], astroInner[i], astroOuter[i], DisplayFeet2outUnits(planetWalk), DisplayFeet2outUnits(sumDistance), "+-" + DisplayFeet2outUnits($range)));
         sumDistance = Number(sumDistance) + Number(planetWalk);
     }
+
     tableLocation = document.getElementById('tableResults');
     tableLocation.innerHTML = '';
     tableLocation.appendChild(table);
